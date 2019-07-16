@@ -1,27 +1,27 @@
 var map;
-var layers = longdo.Layers 
+var layers = longdo.Layers
 function init() {
     map = new longdo.Map({
         placeholder : document.getElementById('mymap')
     });
 //    layerTrigg()
-    map.Event.bind('overlayClick', function (markerSelect) {
-        map.Overlays.remove(markerSelect);
-    });
-    map.Event.bind('click', function() {
-        addTruck();
-    })
-    map.Search.placeholder(document.getElementById("result"))
+//    map.Event.bind('overlayClick', function (markerSelect) {
+//        map.Overlays.remove(markerSelect);
+//    });
+//    map.Event.bind('click', function() {
+//        addTruck();
+//    })
+//    map.Search.placeholder(document.getElementById("result"))
     
 //    https://api.longdo.com/map/doc/demo/basic/12-search.th.php
 //    map.Overlays.add(geom4);
-    map.Route.placeholder(document.getElementById('route'));
-    map.Route.add(new longdo.Marker(
-      { lon: 100.538316, lat: 13.764953 },
-      { title: 'Victory monument', detail: 'I\'m here' }
-    ));
-    map.Route.add({ lon: 100, lat: 15 });
-    map.Route.search
+//    map.Route.placeholder(document.getElementById('route'));
+//    map.Route.add(new longdo.Marker(
+//      { lon: 100.538316, lat: 13.764953 },
+//      { title: 'Victory monument', detail: 'I\'m here' }
+//    ));
+//    map.Route.add({ lon: 100, lat: 15 });
+//    map.Route.search
     var data_file = "http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json"
 //    requestJson(data_file, updateLoc)
     
@@ -41,7 +41,7 @@ function init() {
 //      });
 //
 //    // Perform other work here ...
-//
+
 //    // Set another completion function for the request above
 //    jqxhr.complete(function() {
 //      console.log( "second complete" );
@@ -55,13 +55,6 @@ function init() {
 //            }
 //        }
 //    });
-    
-    var json;
-    $.getJSON('http://www.whateverorigin.org/get?url='+encodeURIComponent('http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json')+'&callback=?', (res)=> {
-        json = res.contents [0]
-        console.log(json)
-    });
-    
     
     
 
@@ -169,20 +162,6 @@ function zoomtrig() {
     let zoombar = document.getElementById('zoomzoom')
     map.zoom(zoombar.value, true);
 }
-    
-function addTruck() {
-    var loc = map.location('POINTER');
-    var marker = new longdo.Marker(loc, {
-        title : "BMarker",
-        icon : {
-            url : 'https://map.longdo.com/mmmap/images/pin_mark.png', 
-            offset : {x: 12, y: 45}
-        }, 
-        clickable: true,
-        draggable: true
-    });
-    map.Overlays.add(marker)
-}
 
 function requestJson(url, updateloc) {
     var http_request = new XMLHttpRequest();
@@ -200,10 +179,6 @@ function requestJson(url, updateloc) {
     http_request.send()
 }
 
-function updateLoc() {
-    
-}
-
 function createCORSRequest(method, url){
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr){
@@ -219,7 +194,8 @@ function createCORSRequest(method, url){
 
 function fetchData() {
 //    let obj = JSON.parse(data)
-    for(things in data) {
-        console.log(things)
+    for(index in data) {
+        //
+        console.log(data[index]);
     }
 }
