@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>การแสดง Animation | Longdo Map API</title>
+    <link rel="stylesheet" href="../demo.css">
+    <script src="../prettify.js"></script>
+    <script src="https://api.longdo.com/map/?key=xxxxxxxxxxxxxx"></script>
+    <script>
+      var map;
+      var marker = new longdo.Marker({ lon: 100.5, lat: 13.7 });
+      function init() {
+        map = new longdo.Map({
+          placeholder: document.getElementById('map')
+        });
+      }
+    </script>
+  </head>
+  <body onload="init();prettyPrint();">
+    <div id="content">
+      <div id="control"><a href="..">back</a> | <a href="view-source:https://api.longdo.com/map/doc/demo/basic/15-animation.th.php">source</a></div>
+      <div class="topic">การแสดง Animation</div>
+      <ol>
+        <li>Animation การปล่อยหมุด
+          <pre class="box prettyprint">
+map.Overlays.drop(MARKER)</pre>
+            <ul class="box">
+              <li>MARKER: marker ที่ต้องการปล่อย</li>
+            </ul>
+          <button onclick="map.Overlays.drop(marker);">ปล่อยหมุด</button>
+        </li>
+        <li>Animation หมุดกระเด้ง
+          <pre class="box prettyprint">
+map.Overlays.bounce(MARKER)</pre>
+          <button onclick="map.Overlays.bounce(marker);">กระเด้ง</button>
+          <button onclick="map.Overlays.bounce(null);">หยุด</button>
+        </li>
+        <li>Animation การเลื่อนหมุด
+        <pre class="box prettyprint">
+maker.move(LOCATION, ANIMATE)</pre>
+          <ul class="box">
+            <li>LOCATION: ตำแหน่งที่จะเลื่อนไป</li>
+            <li>ANIMATE: ให้มี animation หรือไม่</li>
+          </ul>
+        <button onclick="marker.move({ lon: 102, lat: 18 }, true);">เลื่อนหมุด</button>
+      </li>
+      <li>Animation การเลื่อนหมุดตามเส้น
+          <pre class="box prettyprint">
+map.Overlays.pathAnimation(MARKER, PATH);</pre>
+            <ul class="box">
+              <li>MARKER: หมุด</li>
+              <li>PATH: Polyline ของเส้นทางที่จะเลื่อน</li>
+            </ul>
+          <button onclick="map.Overlays.pathAnimation(marker, new longdo.Polyline([{ lon: 102, lat: 18 }, { lon: 98, lat: 17 }, { lon: 99, lat: 14 }]));">เลื่อนหมุด</button>
+        </li>
+    </ol>
+      <br />
+    </div>
+    <div id="map"></div>
+  </body>
+</html>
