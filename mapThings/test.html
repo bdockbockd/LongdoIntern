@@ -1,0 +1,53 @@
+<html>
+<head>
+<style type="text/css"> 
+#mymap{ width: 70%; height: 100%; float: left; margin: 0 10 0 0; padding:0;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script src='http://api.longdo.com/map/?key=31e8f64bd340c1e18ac7d2115ff1adbe'></script>
+    <script src='script.js'></script>
+    <center><H1> Nonthanat MAP </H1></center>
+</head>
+<body onload='init();'>
+ <div id='mymap'></div>
+    
+<!--    <div id='option'>-->
+<!--        <div\>Select Map Type :</div>-->
+<!--
+        
+        <select id="type" name="types" onchange="checkField(this.value)">
+          <option value="normal">Normal</option>
+          <option value="political">Political</option>
+          <option value="google">Google</option>
+          <option value="gray">Gray</option>
+          <option value="hydro">Hydro</option>
+          <option value="google_satellite">GOOGLE_SATELLITE</option>
+          <option value="mapquest">Mapquest</option>
+          <option value="osm">OSM</option>  
+        </select><br>  
+        <br>
+        
+        <input type="checkbox" id='traffic'> Trafic<br>
+        <input type="checkbox" id='camera'> Cameras<br>
+        <input type="checkbox" id="event"> Events<br>
+        <br>
+        <button onclick="curloc()">Crosshair Location</button><br>  
+        <br>
+        <div\>lat :</div>										
+        <input type="text" id="latitude"><br>
+        <div\>lon :</div>
+        <input type="text" id="longtitude"><br>	<br>					
+        <center><button onclick="jumpto()" >JUMP!</button><br></center>	<br>	
+        <button onclick="alert(map.location('GEOLOCATION'))";>Where am I?</button><br>  <br>
+        <div\>ZoOM:</div>												
+        <input type="range" name="zoom" id="zoomzoom" min="3" max="20" onchange="zoomtrig()" value="7">		
+-->
+    
+    
+    
+<!--    </div>-->
+<!--    <div id = 'result'></div>-->
+    <div id='route'></div>
+</body>
+

@@ -1,0 +1,47 @@
+<html>
+<head>
+
+<style type="text/css"> /* จัดหน้าเว็บให้เป็นระเบียบด้วย CSS */
+	 
+#mymap{ width: 30%; height: 100%; float: left; margin: 0 10 0 0; padding:0;}
+body{ margin: 0 0 0 0;}
+#options{margin-left: 100;}
+
+
+</style>
+
+<script src='http://api.longdo.com/map/?key=31e8f64bd340c1e18ac7d2115ff1adbe'>
+</script>
+<script type='text/javascript' src='script.js'></script>
+</head>
+<body onload='init();'>
+	<div id='mymap'></div>
+<div id = "options"> <!-- div options ที่จะแสดงตัวเลือกทั้งหมด -->
+<div\>Select map type:</div>
+<select name="types" onchange="checkField(this.value)"><!-- drop down box เพื่อเลือก layer -->
+  <option value="normal">Normal</option>
+  <option value="political">Political</option>
+  <option value="google">Google</option>
+  <option value="gray">Gray</option>
+  <option value="hydro">Hydro</option>
+  <option value="sattelite">Sattelite</option>
+  <option value="mapquest">Mapquest</option>
+  <option value="osm">OSM</option>  
+</select><br>
+<input type="checkbox" id="box1" value="traffic" onchange="layertrig()">Traffic<br>     <!-- การแสดง overlays ใช้ checkbox ในการเปิด/ปิด -->
+<input type="checkbox" id="box2" value="cameras" onchange="layertrig()">Cameras<br>		<!--*ถึงแม้ traffic จะเป็น layer แต่ในทางปฏิบัติการใช้งานแบบ เปิด/ปิด จะเหมาะสมกว่า-->
+<input type="checkbox" id="box3" value="events" onchange="layertrig()">Events<br>
+<button onclick="curloc()">Crosshair Location</button><br>  <!--Option: วัดพิกัด ณ จุดกากบาทของ map (button & textfield) -->
+<div\>lat:</div>											<!--สังเกตว่า button จะใช้ event onclick เรียกฟังค์ชั่นเมื่อคลิกปุ่ม -->
+<input type="text" id="latitude"><br>
+<div\>lon:</div>
+<input type="text" id="longitude"><br>						
+<button onclick="jumpto()" >JUMP!</button><br>				<!--Option: JUMP สู่พิกัดใน textfield lat,lon -->
+<button onclick="map.location('GEOLOCATION')";>Where am I?</button><br>  <!-- Option: หาตำแหน่งปัจจุบัน ;          เนื่องจากเป็นคำสั่งบรรทัดเดียวจึงไม่จำเป็นต้องเขียน function สั่งเรียกใน onclick ได้เลย-->
+<div\>ZoOM:</div>																					<!--Option: zoom โดยใช้ slider-->
+<input type="range" name="zoom" id="zoomzoom" min="3" max="20" onchange="zoomtrig()" value="7">		<!--แต่ว่าเมื่อใช้ scroll wheel ในการซูม ตัวเลื่อนของ slider ไม่ได้มีการเปลี่ยนค่าตามไปด้วย
+																				แก้ปัญหานี้โดยการเปิดใช้งาน event ของ longdomap API เพื่อเรียกฟังค์ชั่นทุกครั้งที่เกิด event ในกรณีนี้จะใช้ event zoom	
+																				สามารถดู event ทั้งหมดได้ที่  http://api.longdo.com/map/doc/content/	-->
+</div>
+</body>
+</html>
