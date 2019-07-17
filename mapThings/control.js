@@ -7,18 +7,41 @@ var thisTruck;
 var locWay;
 var ready = false;
 var speedAnimation
+var search;
+var suggest;
 
 function init2() {
-    
+    // เซตแมพ
     map = new longdo.Map({
         placeholder : document.getElementById('mymap')
     });
     
-    $.getJSON('http://www.whateverorigin.org/get?url='+encodeURIComponent('http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json')+'&callback=?', (res)=> {
-        jsonData = res.contents [0]
+//    $.getJSON('http://www.whateverorigin.org/get?url='+encodeURIComponent('http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json')+'&callback=?', (res)=> {
+//        jsonData = res.contents [0]
+//        loadData()
+//        
+//    })
+    ;   
+    $.getJSON('http://usermap.longdo.com/montri/MM-Exercise/RealWorldExercise.php', (res) => {
+        jsonData = res[0]
+//        conso
         loadData()
-        
-    });    
+    })
+    
+    //setUpRoute
+    //set place holder route result
+//    map.Route.placeholder(document.getElementById('result'));
+//        map.Route.add(new longdo.Marker(
+//          { lon: 100.538316, lat: 13.764953 },
+//          { title: 'Victory monument', detail: 'I\'m here' }
+//        ));
+    //add all of mark point
+    
+    //เซตที่แปะ placehoder
+    setUpSearch()
+    
+    setUpMapRoute()
+
 }
 
 function loadData() {
@@ -113,11 +136,56 @@ function changeSpeed() {
 
 }
 
-
-
 function checkMarker(marker) {
     var index = markerArray.findIndex( (element)=> {
         return marker.location.lon === element.location.lon && marker.location.lat === element.location.lat
     })
+}
+
+
+funtion setUpMapRoute() {
+    map.Route.placeholder(document.getElementById('route'));
+//		map.Route.add({lon: 100.65184, lat:13.79435});
+//		map.Route.add({lon: 100.64266, lat:13.76717});
+		
+//		map.Route.search();
+    // dynamic
+//		map.Route.enableContextMenu();
+//		map.Route.auto(true);
+//		
+//		map.Event.bind('beforeContextmenu', function(event) {
+//			var element = document.createElement('div');
+//			element.class = 'abc';
+//			element.id = 'aaa';
+//			element.innerHTML = 'clear search';
+//			element.style.cursor = 'pointer';
+//			element.onclick = function() {
+//			map.Route.clear();
+//				};
+//			event.add(element);
+//		});
+//		map.Event.bind('beforeContextmenu', function(event) {
+//			var element = document.createElement('div');
+//			element.class = 'abc';
+//			element.id = 'aaa';
+//			element.innerHTML = 'Home &lt The Mall';
+//			element.style.cursor = 'pointer';
+//			element.onclick = function() {
+//			homethemall();
+//			};
+//			event.add(element);
+//		});
+    
+    
+    // set mode
+//     <button onclick="map.Route.mode(longdo.RouteMode.Cost);">ไปตามถนนหลัก</button>
+//     <button onclick="map.Route.mode(longdo.RouteMode.Distance);">ไปทางลัด</button>
+
+//    <button onclick="map.Route.label(longdo.RouteLabel.Time);">แสดงเวลา</button>          
+//    <button onclick="map.Route.enableRoute(longdo.RouteType.Tollway, false);">ไม่ขึ้นทางด่วน</button>      
+//    <button onclick="map.Route.enableRestrict(longdo.RouteRestrict.Bike, true);">มอเตอร์ไซค์</button>
+//    <u>ข้อมูลเพิ่มเติม</u>: หากต้องการสั่งให้ทำงานต่อหลังจากที่คำนวณเส้นทางเสร็จแล้ว สามารถดัก event GuideComplete ได้ <a href="../advance/01-event.th.php">ดูตัวอย่างได้ที่นี่</a><br /><br />
+
+
 }
 

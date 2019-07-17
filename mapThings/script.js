@@ -2,27 +2,42 @@ var map;
 var layers = longdo.Layers
 function init() {
     map = new longdo.Map({
-        placeholder : document.getElementById('mymap')
+          placeholder: document.getElementById('map'),
+		  zoom: 15,
+		  lastView:false,
+		   location:{lat:13.79435,lon:100.65184}
     });
+//    map.Search.placeholder(document.getElementById('result'));
+
 //    layerTrigg()
+    
+    // click overlay
 //    map.Event.bind('overlayClick', function (markerSelect) {
 //        map.Overlays.remove(markerSelect);
 //    });
+    
+    // click map
 //    map.Event.bind('click', function() {
 //        addTruck();
 //    })
 //    map.Search.placeholder(document.getElementById("result"))
     
-//    https://api.longdo.com/map/doc/demo/basic/12-search.th.php
-//    map.Overlays.add(geom4);
-//    map.Route.placeholder(document.getElementById('route'));
+    
+//    map.Route.placeholder(document.getElementById('result'));
+//
+//    // Static
 //    map.Route.add(new longdo.Marker(
 //      { lon: 100.538316, lat: 13.764953 },
 //      { title: 'Victory monument', detail: 'I\'m here' }
 //    ));
 //    map.Route.add({ lon: 100, lat: 15 });
-//    map.Route.search
-    var data_file = "http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json"
+//    map.Route.search();
+//
+//    // Dynamic
+//    map.Route.enableContextMenu();
+//    map.Route.auto(true);
+    
+//    var data_file = "http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json"
 //    requestJson(data_file, updateLoc)
     
     
@@ -57,8 +72,6 @@ function init() {
 //    });
     
     
-
-    
     //CORS
 //    var request = createCORSRequest("get", data_file);
 //    if (request){
@@ -68,8 +81,47 @@ function init() {
 //        };
 //    request.send();
 //    }
-    
+    map.Route.placeholder(document.getElementById('route'));
+    map.Route.add({lon: 100.65184, lat:13.79435});
+    map.Route.add({lon: 100.64266, lat:13.76717});
+
+    map.Route.search();
+    map.Route.enableContextMenu();
+    map.Route.auto(true);
+
+    map.Event.bind('beforeContextmenu', function(event) {
+        var element = document.createElement('div');
+        element.class = 'abc';
+        element.id = 'aaa';
+        element.innerHTML = 'clear search';
+        element.style.cursor = 'pointer';
+        element.onclick = function() {
+        map.Route.clear();
+            };
+        event.add(element);
+    });
+    map.Event.bind('beforeContextmenu', function(event) {
+        var element = document.createElement('div');
+        element.class = 'abc';
+        element.id = 'aaa';
+        element.innerHTML = 'Home &lt The Mall';
+        element.style.cursor = 'pointer';
+        element.onclick = function() {
+        homethemall();
+        };
+        event.add(element);
+    });
 }
+
+function homethemall(){
+    map.Route.placeholder(document.getElementById('route'));
+    map.Route.add({lon: 100.65184, lat:13.79435});
+    map.Route.add({lon: 100.64266, lat:13.76717});
+
+    map.Route.search();
+    map.Route.enableContextMenu();
+    map.Route.auto(true);
+    }
 
 
 function checkField(str){
