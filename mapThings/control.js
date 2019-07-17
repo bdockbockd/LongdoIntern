@@ -16,6 +16,7 @@ function init2() {
         placeholder : document.getElementById('mymap')
     });
     
+    
 //    $.getJSON('http://www.whateverorigin.org/get?url='+encodeURIComponent('http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json')+'&callback=?', (res)=> {
 //        jsonData = res.contents [0]
 //        loadData()
@@ -143,8 +144,8 @@ function checkMarker(marker) {
 }
 
 
-funtion setUpMapRoute() {
-    map.Route.placeholder(document.getElementById('route'));
+function setUpMapRoute() {
+//    map.Route.placeholder(document.getElementById('route'));
 //		map.Route.add({lon: 100.65184, lat:13.79435});
 //		map.Route.add({lon: 100.64266, lat:13.76717});
 		

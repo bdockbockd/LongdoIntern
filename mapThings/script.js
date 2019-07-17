@@ -1,5 +1,5 @@
-var map;
 var layers = longdo.Layers
+var myLoc;
 function init() {
     map = new longdo.Map({
           placeholder: document.getElementById('map'),
@@ -18,13 +18,22 @@ function init() {
     
     // click map
 //    map.Event.bind('click', function() {
-//        addTruck();
-//    })
-//    map.Search.placeholder(document.getElementById("result"))
-    
-    
-//    map.Route.placeholder(document.getElementById('result'));
+//            var loc = map.location('POINTER'); //map.location('POINTER') จะเป็นค่าพิกัดของเม้าส์ ในmap
+//		
+//            marker= new longdo.Marker(loc,		//สร้าง Marker ซึ่งเป็น longdo object โดยลิ้งค์icon ไปที่รูปรถบรรทุก และตั้งค่าให้ คลิก/ลาก ได้
+//            {
 //
+//            icon: {
+//                url: 'truck.png'
+//            },
+//            clickable:true,
+//
+//            draggable: true
+//            });								  
+//            map.Overlays.add(marker);	//แสดง marker ลงบน map//    })
+    
+//    map.Search.placeholder(document.getElementById("result"))
+
 //    // Static
 //    map.Route.add(new longdo.Marker(
 //      { lon: 100.538316, lat: 13.764953 },
@@ -32,14 +41,13 @@ function init() {
 //    ));
 //    map.Route.add({ lon: 100, lat: 15 });
 //    map.Route.search();
-//
+
 //    // Dynamic
 //    map.Route.enableContextMenu();
 //    map.Route.auto(true);
     
 //    var data_file = "http://usermap.longdo.com/montri/MM-WifiBox/data/2018-05-06.json"
 //    requestJson(data_file, updateLoc)
-    
     
     //Jquery
 //    var jqxhr = $.getJSON( "data.json", function() {
@@ -126,61 +134,85 @@ function homethemall(){
 
 function checkField(str){
     console.log(str)
-    map.Layers.clear()
+//    map.Layers.clear()
 	switch(str){
 		case 'Normal':
-            map.Layers.add(layers.NOMRAL)
+            map.Layers.setBase(layers.NOMRAL)
 			break;
 		case 'political':
-            map.Layers.add(layers.POLITICAL)
+            map.Layers.setBase(layers.POLITICAL)
             break;
 		case 'google':
-            map.Layers.add(layers.GOOGLE_ROADMAP)
+            map.Layers.setBase(layers.GOOGLE_ROADMAP)
 			break;
 		case 'gray':
-            map.Layers.add(layers.GRAY)
+            map.Layers.setBase(layers.GRAY)
 			break;
 		case 'hydro':                                  
-            map.Layers.add(layers.HYDRO)
+            map.Layers.setBase(layers.HYDRO)
             break
 		case 'google_satellite':
-            map.Layers.add(layers.GOOGLE_SATELLITE)
+            map.Layers.setBase(layers.GOOGLE_SATELLITE)
             break
 		case 'osm':
-            map.Layers.add(layers.OSM)
+            map.Layers.setBase(layers.OSM)
             break
 		default:
-            map.Layers.add(layers.NOMRAL)
+            map.Layers.setBase(layers.NOMRAL)
     }
 }
 
 function layerTrigg() {
+//    ["traffic","camera","event"].forEach((item)=>{
+//        let box = document.getElementById(item)    
+//        box.addEventListener('change', function(item) {
+//                            console.log(item)
+//
+//            if(item==="traffic") {
+//                if(box.checked === true) {
+//                    map.Layers.add(layers.TRAFFIC)
+//                } else {
+//                    map.Layers.remove(layers.TRAFFIC)
+//                }
+//            } else if(item==="camera") {
+//                if(box.checked === true) {
+//                    map.Overlays.load(longdo.Overlays.cameras);
+//                } else {
+//                    map.Overlays.unload(longdo.Overlays.cameras)
+//                }
+//            } else {
+//                if(box.checked === true) {
+//                    map.Overlays.load(longdo.Overlays.events);
+//                } else {
+//                    map.Overlays.unload(longdo.Overlays.events);
+//                }
+//            }
+//            
+//        })
+//    });
     ["traffic","camera","event"].forEach((item)=>{
-        let box = document.getElementById(item)    
-        box.addEventListener('change', function(item) {
-                            console.log(item)
-
-            if(item==="traffic") {
-                if(box.checked === true) {
-                    map.Layers.add(layers.TRAFFIC)
-                } else {
-                    map.Layers.remove(layers.TRAFFIC)
-                }
-            } else if(item==="camera") {
-                if(box.checked === true) {
+        if($('#' + item).is(":checked")) {
+            if(item === "traffic") {
+                map.Layers.add(layers.TRAFFIC)
+            } else {
+                if(item === "camera") {
+                    console.log(item)
                     map.Overlays.load(longdo.Overlays.cameras);
                 } else {
-                    map.Overlays.unload(longdo.Overlays.cameras)
-                }
-            } else {
-                if(box.checked === true) {
-                    map.Overlays.load(longdo.Overlays.events);
-                } else {
-                    map.Overlays.unload(longdo.Overlays.events);
+                    map.Overlays.load(longdo.Overlays.events)
                 }
             }
-            
-        })
+        } else {
+            if(item === "traffic") {
+                map.Layers.remove(layers.TRAFFIC)
+            } else {
+                if(item === "camera") {
+                    map.Overlays.unload(longdo.Overlays.cameras)
+                } else {
+                    map.Overlays.unload(longdo.Overlays.events)
+                }
+            }
+        }
     });
 }
 
@@ -194,12 +226,12 @@ function curloc() {
 function jumpto() {
     var latbox = document.getElementById('latitude')
     var lonbox = document.getElementById('longtitude')
-    console.log(latbox.value)
     if(latbox && lonbox && parseFloat(latbox.value) && parseFloat(lonbox.value)) {
+        alert(`${latbox.value}  ${lonbox.value}`)
         try {
             map.location({
-            lon: parseFloat(latbox.value),
-            lat: parseFloat(lonbox.value)
+            lon: parseFloat(lonbox.value),
+            lat: parseFloat(latbox.value)
         }, true)
         }catch(e){
             alert(e)
@@ -247,7 +279,22 @@ function createCORSRequest(method, url){
 function fetchData() {
 //    let obj = JSON.parse(data)
     for(index in data) {
-        //
         console.log(data[index]);
     }
+}
+
+function findMyLoc() {
+////    map.location(longdo.LocationMode.Geolocation);
+//    myLoc = map.location(longdo.LocationMode.Geolocation).location();
+//    console.log(myLoc)
+//    myLoc = map.location("GEOLOCATION").location()
+////    map.location(longdo.LocationMode.Geolocation);
+//
+//    console.log(myLoc)
+//    try {
+//            map.location(map.location(longdo.LocationMode.Geolocation), true)
+//    }catch(e){
+//        alert(e)
+//    }
+    map.location(longdo.LocationMode.Geolocation)
 }

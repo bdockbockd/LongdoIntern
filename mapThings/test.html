@@ -52,19 +52,18 @@
           <option value="osm">OSM</option>  
         </select><br>  
         <br>
-        
-        <input type="checkbox" id='traffic'> Trafic<br>
-        <input type="checkbox" id='camera'> Cameras<br>
-        <input type="checkbox" id="event"> Events<br>
+            <input type="checkbox" value=0 id='traffic' onchange="layerTrigg(this.value)"> Trafic<br>
+            <input type="checkbox" value=1 id='camera' onchange="layerTrigg(this.value)"> Cameras<br>
+            <input type="checkbox" value=2 id="event" onchange="layerTrigg(this.value)"> Events<br>
         <br>
         <button onclick="curloc()">Crosshair Location</button><br>  
         <br>
         <div\>lat :</div>										
-        <input type="text" id="latitude"><br>
+        <input type="number" id="latitude"><br>
         <div\>lon :</div>
-        <input type="text" id="longtitude"><br>	<br>					
+        <input type="number" id="longtitude"><br>	<br>					
         <center><button onclick="jumpto()" >JUMP!</button><br></center>	<br>	
-        <button onclick="alert(map.location('GEOLOCATION'))";>Where am I?</button><br>  <br>
+        <button onclick="findMyLoc()";>Where am I?</button><br>  <br>
         <div\>ZoOM:</div>												
         <input type="range" name="zoom" id="zoomzoom" min="3" max="20" onchange="zoomtrig()" value="7">		
         <li>การเลื่อนหมุดตามเส้น
@@ -73,7 +72,7 @@
             <ul class="box">
             </ul>
           <button onclick="moveTruck();">เลื่อนหมุด</button>
-<!--           <input type="range" name="speed" id="speedAnimation" min="1" max="10" onchange="changeSpeed()" value="5">		-->
+           <input type="range" name="speed" id="speedAnimation" min="1" max="10" onchange="changeSpeed()" value="5">		
  
        </li>
     
